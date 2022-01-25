@@ -5,4 +5,4 @@
 /out/
 /out/production/classes/
 /out/test/classes/
-/resources/application-oauth.properties/
+/src/main/resources/application-oauth.properties
