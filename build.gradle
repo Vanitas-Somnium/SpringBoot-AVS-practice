@@ -1,0 +1,51 @@
+plugins { // (1)
+    id 'org.springframework.boot' version '2.4.1' // RELEASE 삭제
+    id 'io.spring.dependency-management' version '1.0.10.RELEASE'
+    id 'java'
+}
+
+group 'com.jojoldu.book'
+version '1.0.4-SNAPSHOT-'+new Date().format("yyyyMMddHHmmss")
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+    jcenter()
+}
+
+// for Junit 5
+test { // (2)
+    useJUnitPlatform()
+}
+
+dependencies {
+    //(3)
+    implementation('org.springframework.boot:spring-boot-starter-web')
+
+    // lombok
+    implementation('org.projectlombok:lombok')
+    annotationProcessor('org.projectlombok:lombok')
+    testImplementation('org.projectlombok:lombok')
+    testAnnotationProcessor('org.projectlombok:lombok')
+
+    //Spring Data JPA
+    /* spring-boot-starter-data-jpa
+        스프링 부트용 Spring Data JPA 추상화 라이브러리
+        스프링 부트 버전에 맞춰 자동으로 JPA 관련 라이브러리들의 버전을 관리
+
+        h2
+         인메모리형 관계형 데이터베이스
+         별도의 설치가 필요없이 프로젝트 의존성만으로 관리 가능
+         메모리에서 실행되기 때문에 애플리케이션을 재시작할 때마다 초기화된다는 점을 이용,
+           테스트 용도로 많이 사용됨
+         JPA의 테스트, 로컬 환경에서의 구동에서 사용할 예정
+     */
+
+    implementation('org.springframework.boot:spring-boot-starter-data-jpa')
+    implementation("org.mariadb.jdbc:mariadb-java-client")
+    implementation('com.h2database:h2')
+    testImplementation('org.springframework.boot:spring-boot-starter-test')
+
+    //mustache
+    implementation('org.springframework.boot:spring-boot-starter-mustache')
+}
