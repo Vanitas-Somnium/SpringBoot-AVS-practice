@@ -4,11 +4,17 @@ var main = {
         $('#btn-save').on('click', function () {
             _this.save();
         });
-
         $('#btn-update').on('click', function () {
-            _this.update();
-        });
+            var author = $('#author').val();
+            var userNames = $('#name').text();
+            if(userNames==author){
+                _this.update();
+            }else{
+                alert(author+userNames);
+                alert('작성자만이 수정 가능합니다');
+            }
 
+        });
         $('#btn-delete').on('click', function () {
             _this.delete();
         });
@@ -36,6 +42,7 @@ var main = {
      update : function () {
             var data = {
                 title: $('#title').val(),
+                userNames : $('#userNames').val(),
                 content: $('#content').val()
             };
 
@@ -47,6 +54,7 @@ var main = {
                 dataType: 'json',
                 contentType:'application/json; charset=utf-8',
                 data: JSON.stringify(data)
+
             }).done(function() {
                 alert('글이 수정되었습니다.');
                 window.location.href = '/';

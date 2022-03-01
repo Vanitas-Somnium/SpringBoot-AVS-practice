@@ -1,10 +1,14 @@
 package demo.admin.web;
 
+import demo.admin.config.auth.SecurityConfig;
 import demo.admin.web.AppController;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.FilterType;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 
@@ -26,7 +30,9 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
     - 단, @Service, @Component, @Repository등은 사용 불가
     - 여기서는 컨트롤러만 사용하기 때문에 선언.
  */
-@WebMvcTest(controllers = AppController.class)
+@WebMvcTest(controllers = AppController.class, excludeFilters={
+        @ComponentScan.Filter(type = FilterType.ASSIGNABLE_TYPE,classes = SecurityConfig.class)
+})
 public class AppControllerTest {
 
     /* Autowired
@@ -39,6 +45,7 @@ public class AppControllerTest {
     @Autowired
     private MockMvc mvc;
 
+    @WithMockUser(roles = "USER")
     @Test
     public void return_hello() throws Exception{
         String hello = "hello";
@@ -63,6 +70,7 @@ public class AppControllerTest {
                 .andExpect(content().string(hello));
     }
 
+    @WithMockUser(roles = "USER")
     @Test
     public void return_helloDto() throws Exception{
         String name = "hello";

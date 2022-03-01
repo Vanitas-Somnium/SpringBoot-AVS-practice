@@ -21,6 +21,9 @@ test { // (2)
 dependencies {
     //(3)
     implementation('org.springframework.boot:spring-boot-starter-web')
+    //mustache
+    implementation('org.springframework.boot:spring-boot-starter-mustache')
+
 
     // lombok
     implementation('org.projectlombok:lombok')
@@ -44,8 +47,15 @@ dependencies {
     implementation('org.springframework.boot:spring-boot-starter-data-jpa')
     implementation("org.mariadb.jdbc:mariadb-java-client")
     implementation('com.h2database:h2')
+
+
+    //Spring Security
+    implementation('org.springframework.boot:spring-boot-starter-oauth2-client')
     testImplementation('org.springframework.boot:spring-boot-starter-test')
 
-    //mustache
-    implementation('org.springframework.boot:spring-boot-starter-mustache')
+    //Session Database
+    implementation('org.springframework.session:spring-session-jdbc')
+
+    //For Tests
+    testImplementation("org.springframework.security:spring-security-test")
 }

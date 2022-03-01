@@ -1,5 +1,23 @@
 {{>layout/header}}
-<h1>게시글 등록</h1>
+<head>
+    <link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Noto+Serif+KR:wght@200&display=swap" rel="stylesheet">
+    <style>
+        .default{
+            width:880px;
+            float: right;
+        }
+        .Black-Han-Sans{
+            font-family:'Black Han Sans'; sans-serif;
+        }
+        .Noto-Serif-Korean{
+            font-family:'Noto Serif KR'; serif;
+        }
+    </style>
+</head>
+<div class="Black-Han-Sans" style="background-color:#40E0D0; border:8px solid black;">
+    <h1>게시글 등록</h1>
+</div>
+<div class="Noto-Serif-Korean">
 <div class="col-md-12">
     <div class="col-md-4">
         <form>
@@ -9,7 +27,7 @@
             </div>
            <div class="form-group">
                <label for="author">작성자</label>
-               <input type="text" class="form-control" id="author" placeholder="작성자를 입력하세요">
+               <input type="text" class="form-control" id="author" value="{{userNames}}" readonly>
            </div>
            <div class="form-group">
                <label for="content">내용</label>
@@ -19,5 +37,6 @@
         <a href="/" role="button" class="btn btn-secondary">취소</a>
         <button type="button" class="btn btn-primary" id="btn-save">등록</button>
     </div>
+</div>
 </div>
 {{>layout/footer}}

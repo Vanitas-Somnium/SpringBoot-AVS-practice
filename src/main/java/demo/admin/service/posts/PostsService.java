@@ -7,6 +7,8 @@ import demo.admin.web.dto.PostsResponseDto;
 import demo.admin.web.dto.PostsSaveRequestDto;
 import demo.admin.web.dto.PostsUpdateRequestDto;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -37,10 +39,27 @@ public class PostsService {
         postsRepository.delete(posts);
     }
 
+    @Transactional
+    public Page<Posts> search(String keyword, Pageable pageable){
+        Page<Posts> postsList = postsRepository.findByTitleContaining(keyword,pageable);
+        System.out.println(postsList);
+        return postsList;
+    }
+
     @Transactional(readOnly = true)
     public List<PostsListResponseDto> findAllDesc(){
         return postsRepository.findAllDesc().stream().map(PostsListResponseDto::new).collect(Collectors.toList());
 
+    }
+
+    @Transactional(readOnly = true)
+    public Page<Posts> pageList(Pageable pageable){
+        return postsRepository.findAll(pageable);
+    }
+
+    @Transactional
+    public int updateView(Long id){
+        return postsRepository.updateView(id);
     }
     /* findAllDesc
         트랜젝션 어노테이션(@Transactional)에 옵션이 하나 추가됨.
